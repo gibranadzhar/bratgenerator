@@ -3,195 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pembuat Sampul Brat Keren!</title>
+    <title>Pembuat Sampul Brat</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f3f0e8;
+            background-color: #f0f0f0;
             margin: 0;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 20px;
         }
 
-        .container {
-            max-width: 600px;
+        .main-content {
+            max-width: 400px;
+            margin: 0 auto;
             background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            padding: 30px;
-            margin-bottom: 30px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        h1 {
+        .brat-instruction {
             color: #333;
+            font-size: 1.2em;
+            font-weight: bold;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 1px #ddd;
-        }
-
-        .facebook-ad {
-            display: flex;
-            align-items: center;
-            background-color: #e9ecef;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
-            margin-bottom: 20px;
-        }
-
-        .facebook-ad img {
-            width: 60px;
-            height: 60px;
-            margin-right: 20px;
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .facebook-ad .ad-text {
-            text-align: left;
-            flex-grow: 1;
-        }
-
-        .facebook-ad h4 {
-            margin: 0;
-            font-size: 1.1em;
-            color: #495057;
-            font-weight: 600;
-        }
-
-        .facebook-ad p {
-            margin: 5px 0 0;
-            font-size: 0.9em;
-            color: #6c757d;
         }
 
         .brat-container {
-            background-color: #a8dadc;
-            color: #1d3557;
-            padding: 50px 30px;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-            font-size: 1.8em;
-            line-height: 1.6;
-            font-weight: bold;
+            background-color: #79bf6a; /* Warna hijau baru */
+            color: white;
+            padding: 30px;
+            min-height: 200px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 250px;
-            text-align: center;
-            margin-bottom: 25px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .brat-container.generated {
-            background-color: #457b9d;
-            color: #f1faee;
+            font-size: 1.8em;
+            font-weight: bold;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
         .input-text {
-            width: 80%;
-            padding: 12px 15px;
+            width: 90%;
+            padding: 10px;
             font-size: 1em;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            border: 1px solid #ccc;
             margin-bottom: 20px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .input-text:focus {
-            border-color: #1877f2;
-        }
-
-        .instruction-text {
-            font-size: 1.1em;
-            color: #555;
-            margin-top: 25px;
-            margin-bottom: 15px;
         }
 
         .action-button {
-            padding: 15px 40px;
-            font-size: 1.3em;
+            padding: 12px 30px;
+            font-size: 1.1em;
             cursor: pointer;
             border: none;
-            background-color: #4CAF50;
+            background-color: #388e3c; /* Warna tombol hijau gelap */
             color: white;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-weight: 600;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-
+        
         .action-button:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
+            background-color: #2e7d32;
         }
 
-        .how-it-works {
-            margin-top: 40px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 30px;
-            text-align: left;
-        }
-
-        .how-it-works h2 {
-            color: #333;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .how-it-works p {
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-
-        /* Animasi sederhana */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
+        .save-instruction {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Pembuat Sampul Brat Keren!</h1>
-        <div class="facebook-ad">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Facebook_icon.svg/1024px-Facebook_icon.svg.png" alt="Logo Facebook">
-            <div class="ad-text">
-                <h4>Mulai Komunitas Anda.</h4>
-                <p>Buat grup menarik dan bagikan ide-ide seru. Buka Facebook sekarang!</p>
-            </div>
-            <span style="font-size: 2em; margin-left: auto; color: #1877f2;">&rarr;</span>
+    <div class="main-content">
+        <div class="brat-instruction">
+            Klik tombol 'Buat' untuk membuat sampul brat Anda
         </div>
 
-        <input type="text" id="textInput" class="input-text" placeholder="Masukkan tulisan Anda di sini...">
+        <input type="text" id="textInput" class="input-text" placeholder="Masukkan teks di sini">
 
-        <div class="brat-container fade-in" id="brat-container">
+        <div class="brat-container" id="brat-container">
             Tulisan Anda akan muncul di sini.
         </div>
 
-        <button class="action-button" onclick="generateBrat()">Buat Sampul Brat!</button>
+        <button class="action-button" onclick="generateBrat()">Buat</button>
 
-        <p class="instruction-text">Simpan gambar ini dengan cara mengambil tangkapan layar.</p>
-
-        <div class="how-it-works">
-            <h2>Bagaimana Cara Kerjanya?</h2>
-            <p>Masukkan tulisan yang Anda inginkan di kolom di atas, lalu tekan tombol "Buat Sampul Brat!".</p>
-            <p>Tulisan tersebut akan langsung muncul di dalam kotak dengan gaya brat yang keren.</p>
-            <p>Setelah menemukan desain yang pas, cukup ambil tangkapan layar untuk menyimpannya dan menggunakannya!</p>
+        <div class="save-instruction">
+            Ambil tangkapan layar untuk menyimpan
         </div>
     </div>
 
@@ -201,18 +95,12 @@
             const bratContainer = document.getElementById('brat-container');
             const userText = textInput.value;
 
-            // Jika kolom input kosong, berikan pesan default
+            // Jika input kosong, tampilkan pesan default
             if (userText.trim() === "") {
-                bratContainer.textContent = "Masukkan tulisan Anda terlebih dahulu!";
+                bratContainer.textContent = "Masukkan teks di sini";
             } else {
                 bratContainer.textContent = userText;
             }
-            
-            // Tambahkan kelas untuk animasi dan perubahan gaya
-            bratContainer.classList.add('generated');
-            setTimeout(() => {
-                bratContainer.classList.remove('generated');
-            }, 500);
         }
     </script>
 </body>

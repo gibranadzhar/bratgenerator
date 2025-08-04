@@ -1,154 +1,182 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pembuat Sampul Brat</title>
-\<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)"\>
-\<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin\>
-\<link href="[https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap](https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap)" rel="stylesheet"\>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembuat Sampul Brat</title>
 
-\<style\>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background-color: #FFC0CB; /* Warna latar belakang pink */
-        margin: 0;
-        padding: 20px;
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-    .main-content {
-        max-width: 400px;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #FFC0CB; /* Warna latar belakang pink */
+            margin: 0;
+            padding: 20px;
+        }
 
-    .brat-instruction {
-        color: #333;
-        font-size: 1.2em;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
+        .main-content {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-    .brat-container {
-        background-color: #79bf6a;
-        color: white;
-        padding: 30px;
-        min-height: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 2.2em;
-        font-weight: normal;
-        line-height: 1.2;
-        margin-bottom: 20px;
-        transition: background-color 0.3s, color 0.3s;
-        /* Efek blur ditambahkan di sini */
-        filter: blur(1px);
-    }
+        .brat-instruction {
+            color: #333;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-    .input-group {
-        margin-bottom: 15px;
-    }
+        .brat-container {
+            background-color: #79bf6a;
+            color: white;
+            padding: 30px;
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2em;
+            font-weight: normal;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            filter: blur(1px);
+        }
 
-    .input-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #555;
-    }
+        .input-group {
+            margin-bottom: 15px;
+        }
 
-    .text-input {
-        width: 90%;
-        padding: 10px;
-        font-size: 1em;
-        border: 1px solid #ccc;
-        font-family: Arial, sans-serif;
-    }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
 
-    .color-input {
-        width: 100px;
-        height: 40px;
-        padding: 0;
-        border: none;
-        cursor: pointer;
-    }
+        .text-input {
+            width: 90%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+        }
 
-    .action-button {
-        padding: 12px 30px;
-        font-size: 1.1em;
-        cursor: pointer;
-        border: none;
-        background-color: #388e3c;
-        color: white;
-    }
+        .color-input {
+            width: 100px;
+            height: 40px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+        }
 
-    .action-button:hover {
-        background-color: #2e7d32;
-    }
+        .action-button {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border: none;
+            background-color: #388e3c;
+            color: white;
+            margin-right: 10px;
+        }
+        
+        .action-button:hover {
+            background-color: #2e7d32;
+        }
 
-    .save-instruction {
-        font-size: 0.9em;
-        color: #666;
-        margin-top: 20px;
-    }
-\</style\>
+        .copy-button {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff; /* Warna biru untuk tombol salin */
+            color: white;
+        }
+        
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
 
+        .save-instruction {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-<div class="main-content">
-<div class="brat-instruction">
-Buat sampul brat kustom Anda!
-</div>
-    \<div class="input-group"\>
-        \<label for="textInput"\>Teks Sampul:\</label\>
-        \<input type="text" id="textInput" class="text-input" placeholder="Masukkan teks di sini"\>
-    \</div\>
+    <div class="main-content">
+        <div class="brat-instruction">
+            Buat sampul brat kustom Anda!
+        </div>
 
-    \<div class="input-group"\>
-        \<label for="bgColorInput"\>Warna Latar Belakang Kotak Brat:\</label\>
-        \<input type="color" id="bgColorInput" class="color-input" value="#79bf6a"\>
-    \</div\>
-    \<div class="input-group"\>
-        \<label for="textColorInput"\>Warna Teks Kotak Brat:\</label\>
-        \<input type="color" id="textColorInput" class="color-input" value="#ffffff"\>
-    \</div\>
+        <div class="input-group">
+            <label for="textInput">Teks Sampul:</label>
+            <input type="text" id="textInput" class="text-input" placeholder="Masukkan teks di sini">
+        </div>
 
-    \<div class="brat-container" id="brat-container"\>
-        Tulisan Anda akan muncul di sini.
-    \</div\>
+        <div class="input-group">
+            <label for="bgColorInput">Warna Latar Belakang Kotak Brat:</label>
+            <input type="color" id="bgColorInput" class="color-input" value="#79bf6a">
+        </div>
+        <div class="input-group">
+            <label for="textColorInput">Warna Teks Kotak Brat:</label>
+            <input type="color" id="textColorInput" class="color-input" value="#ffffff">
+        </div>
 
-    \<button class="action-button" onclick="generateBrat()"\>Buat\</button\>
+        <div class="brat-container" id="brat-container">
+            Tulisan Anda akan muncul di sini.
+        </div>
 
-    \<div class="save-instruction"\>
-        Ambil tangkapan layar untuk menyimpan
-    \</div\>
-\</div\>
+        <button class="action-button" onclick="generateBrat()">Buat</button>
+        <button class="copy-button" onclick="copyText()">Salin Teks</button>
 
-\<script\>
-    function generateBrat() {
-        const textInput = document.getElementById('textInput');
-        const bgColorInput = document.getElementById('bgColorInput');
-        const textColorInput = document.getElementById('textColorInput');
-        const bratContainer = document.getElementById('brat-container');
+        <div class="save-instruction">
+            Ambil tangkapan layar untuk menyimpan
+        </div>
+    </div>
 
-        const userText = textInput.value;
-        const bgColor = bgColorInput.value;
-        const textColor = textColorInput.value;
+    <script>
+        function generateBrat() {
+            const textInput = document.getElementById('textInput');
+            const bgColorInput = document.getElementById('bgColorInput');
+            const textColorInput = document.getElementById('textColorInput');
+            const bratContainer = document.getElementById('brat-container');
+            
+            const userText = textInput.value;
+            const bgColor = bgColorInput.value;
+            const textColor = textColorInput.value;
 
-        bratContainer.style.backgroundColor = bgColor;
-        bratContainer.style.color = textColor;
+            bratContainer.style.backgroundColor = bgColor;
+            bratContainer.style.color = textColor;
 
-        if (userText.trim() === "") {
-            bratContainer.textContent = "Tulis sesuatu di sini";
-        } else {
-            bratContainer.textContent = userText;
+            if (userText.trim() === "") {
+                bratContainer.textContent = "Tulis sesuatu di sini";
+            } else {
+                bratContainer.textContent = userText;
+            }
         }
-    }
-\</script\>
 
+        function copyText() {
+            const bratContainer = document.getElementById('brat-container');
+            const textToCopy = bratContainer.textContent;
+            
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert("Teks berhasil disalin!");
+                })
+                .catch(err => {
+                    console.error('Gagal menyalin teks: ', err);
+                    alert("Gagal menyalin teks. Silakan salin secara manual.");
+                });
+        }
+    </script>
 </body>
 </html>

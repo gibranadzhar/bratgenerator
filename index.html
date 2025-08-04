@@ -13,7 +13,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #FFC0CB; /* Warna latar belakang pink */
+            background-color: #FFC0CB;
             margin: 0;
             padding: 20px;
         }
@@ -210,41 +210,35 @@
             const bratContainer = document.getElementById('brat-container');
             const text = bratContainer.textContent;
             
-            // Ambil computed styles untuk memastikan konsistensi
             const computedStyle = window.getComputedStyle(bratContainer);
             const bgColor = computedStyle.backgroundColor;
             const textColor = computedStyle.color;
             const font = computedStyle.fontFamily;
             const fontSize = computedStyle.fontSize;
             const paddingX = parseInt(computedStyle.paddingLeft) + parseInt(computedStyle.paddingRight);
-            const paddingY = parseInt(computedStyle.paddingTop) + parseInt(computedStyle.paddingBottom);
 
             const canvas = document.getElementById('canvasOutput');
             const ctx = canvas.getContext('2d');
-            const scaleFactor = 2; // Menggandakan resolusi untuk kualitas lebih baik
+            const scaleFactor = 2;
 
-            // Atur ukuran canvas sesuai dengan ukuran container (dikali skala)
             canvas.width = (bratContainer.offsetWidth) * scaleFactor;
             canvas.height = (bratContainer.offsetHeight) * scaleFactor;
             ctx.scale(scaleFactor, scaleFactor);
 
-            // Terapkan efek blur yang sama seperti di CSS
             ctx.filter = computedStyle.filter;
 
-            // Gambar latar belakang
             ctx.fillStyle = bgColor;
             ctx.fillRect(0, 0, bratContainer.offsetWidth, bratContainer.offsetHeight);
 
-            // Atur font dan warna teks
             ctx.font = `${fontSize} ${font}`;
             ctx.fillStyle = textColor;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-
-            // Logika untuk membungkus teks (wrap text)
+            
+            // --- Logika baru untuk menempatkan teks di tengah secara vertikal ---
             const words = text.split(' ');
+            let lines = [];
             let line = '';
-            let y = (bratContainer.offsetHeight / 2);
             const lineHeight = parseInt(fontSize) * 1.2;
             const maxWidth = bratContainer.offsetWidth - paddingX;
 
@@ -252,16 +246,22 @@
                 const testLine = line + words[i] + ' ';
                 const metrics = ctx.measureText(testLine);
                 if (metrics.width > maxWidth && i > 0) {
-                    ctx.fillText(line, bratContainer.offsetWidth / 2, y);
+                    lines.push(line);
                     line = words[i] + ' ';
-                    y += lineHeight;
                 } else {
                     line = testLine;
                 }
             }
-            ctx.fillText(line, bratContainer.offsetWidth / 2, y);
+            lines.push(line);
+            
+            const totalTextHeight = lines.length * lineHeight;
+            const startY = (bratContainer.offsetHeight - totalTextHeight) / 2 + lineHeight / 2;
 
-            // Buat link download dan picu klik
+            for (let i = 0; i < lines.length; i++) {
+                ctx.fillText(lines[i], bratContainer.offsetWidth / 2, startY + (i * lineHeight));
+            }
+            // --- Akhir dari logika baru ---
+
             const dataURL = canvas.toDataURL('image/png');
             const downloadLink = document.createElement('a');
             downloadLink.href = dataURL;

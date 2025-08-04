@@ -8,7 +8,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            background-color: #f3f0e8; /* Warna latar belakang yang lebih lembut */
+            background-color: #f3f0e8;
             margin: 0;
             padding: 30px;
             display: flex;
@@ -68,8 +68,8 @@
         }
 
         .brat-container {
-            background-color: #a8dadc; /* Warna hijau kebiruan yang lebih segar */
-            color: #1d3557; /* Warna teks biru tua */
+            background-color: #a8dadc;
+            color: #1d3557;
             padding: 50px 30px;
             border-radius: 15px;
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
@@ -90,6 +90,22 @@
             color: #f1faee;
         }
 
+        .input-text {
+            width: 80%;
+            padding: 12px 15px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-text:focus {
+            border-color: #1877f2;
+        }
+
         .instruction-text {
             font-size: 1.1em;
             color: #555;
@@ -102,7 +118,7 @@
             font-size: 1.3em;
             cursor: pointer;
             border: none;
-            background-color: #4CAF50; /* Warna hijau yang lebih cerah */
+            background-color: #4CAF50;
             color: white;
             border-radius: 8px;
             margin-top: 20px;
@@ -151,7 +167,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Buat Sampul Brat Keren Anda!</h1>
+        <h1>Pembuat Sampul Brat Keren!</h1>
         <div class="facebook-ad">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Facebook_icon.svg/1024px-Facebook_icon.svg.png" alt="Logo Facebook">
             <div class="ad-text">
@@ -161,8 +177,10 @@
             <span style="font-size: 2em; margin-left: auto; color: #1877f2;">&rarr;</span>
         </div>
 
+        <input type="text" id="textInput" class="input-text" placeholder="Masukkan tulisan Anda di sini...">
+
         <div class="brat-container fade-in" id="brat-container">
-            Klik tombol di bawah untuk membuat sampul brat Anda!
+            Tulisan Anda akan muncul di sini.
         </div>
 
         <button class="action-button" onclick="generateBrat()">Buat Sampul Brat!</button>
@@ -171,32 +189,27 @@
 
         <div class="how-it-works">
             <h2>Bagaimana Cara Kerjanya?</h2>
-            <p>Tekan tombol "Buat Sampul Brat!" dan kami akan secara acak menampilkan sebuah frasa atau gaya yang keren untuk sampul Anda.</p>
-            <p>Anda bisa menekan tombol berkali-kali sampai menemukan desain yang paling Anda sukai.</p>
+            <p>Masukkan tulisan yang Anda inginkan di kolom di atas, lalu tekan tombol "Buat Sampul Brat!".</p>
+            <p>Tulisan tersebut akan langsung muncul di dalam kotak dengan gaya brat yang keren.</p>
             <p>Setelah menemukan desain yang pas, cukup ambil tangkapan layar untuk menyimpannya dan menggunakannya!</p>
         </div>
     </div>
 
     <script>
-        const bratContainer = document.getElementById('brat-container');
-        const phrases = [
-            "🔥 Brat Kekinian Abis 🔥",
-            "😎 Brat Elegan Berkelas 😎",
-            "✨ Brat Glamor Memukau ✨",
-            "🚀 Brat Kreatif Inovatif 🚀",
-            "👑 Brat Eksklusif Terpercaya 👑",
-            "⚡ Brat Cepat Tanggap ⚡",
-            "💡 Brat Solusi Terbaik 💡",
-            "🌈 Brat Penuh Warna 🌈",
-            "💯 Brat Berkualitas Tinggi 💯",
-            "💎 Brat Sangat Berharga 💎"
-        ];
-
         function generateBrat() {
-            const randomPhrase = phrases[(Math.floor(Math.random() * phrases.length))];
-            bratContainer.textContent = randomPhrase;
-            bratContainer.classList.add('generated'); // Tambahkan kelas untuk perubahan gaya
-            // Hapus kelas setelah beberapa saat untuk animasi selanjutnya
+            const textInput = document.getElementById('textInput');
+            const bratContainer = document.getElementById('brat-container');
+            const userText = textInput.value;
+
+            // Jika kolom input kosong, berikan pesan default
+            if (userText.trim() === "") {
+                bratContainer.textContent = "Masukkan tulisan Anda terlebih dahulu!";
+            } else {
+                bratContainer.textContent = userText;
+            }
+            
+            // Tambahkan kelas untuk animasi dan perubahan gaya
+            bratContainer.classList.add('generated');
             setTimeout(() => {
                 bratContainer.classList.remove('generated');
             }, 500);

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembuat Sampul Brat Keren!</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #f3f0e8; /* Warna latar belakang yang lebih lembut */
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 1px #ddd;
+        }
+
+        .facebook-ad {
+            display: flex;
+            align-items: center;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+
+        .facebook-ad img {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .facebook-ad .ad-text {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .facebook-ad h4 {
+            margin: 0;
+            font-size: 1.1em;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .facebook-ad p {
+            margin: 5px 0 0;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        .brat-container {
+            background-color: #a8dadc; /* Warna hijau kebiruan yang lebih segar */
+            color: #1d3557; /* Warna teks biru tua */
+            padding: 50px 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            font-size: 1.8em;
+            line-height: 1.6;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+            text-align: center;
+            margin-bottom: 25px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .brat-container.generated {
+            background-color: #457b9d;
+            color: #f1faee;
+        }
+
+        .instruction-text {
+            font-size: 1.1em;
+            color: #555;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .action-button {
+            padding: 15px 40px;
+            font-size: 1.3em;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50; /* Warna hijau yang lebih cerah */
+            color: white;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .action-button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .how-it-works {
+            margin-top: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: left;
+        }
+
+        .how-it-works h2 {
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .how-it-works p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        /* Animasi sederhana */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buat Sampul Brat Keren Anda!</h1>
+        <div class="facebook-ad">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Facebook_icon.svg/1024px-Facebook_icon.svg.png" alt="Logo Facebook">
+            <div class="ad-text">
+                <h4>Mulai Komunitas Anda.</h4>
+                <p>Buat grup menarik dan bagikan ide-ide seru. Buka Facebook sekarang!</p>
+            </div>
+            <span style="font-size: 2em; margin-left: auto; color: #1877f2;">&rarr;</span>
+        </div>
+
+        <div class="brat-container fade-in" id="brat-container">
+            Klik tombol di bawah untuk membuat sampul brat Anda!
+        </div>
+
+        <button class="action-button" onclick="generateBrat()">Buat Sampul Brat!</button>
+
+        <p class="instruction-text">Simpan gambar ini dengan cara mengambil tangkapan layar.</p>
+
+        <div class="how-it-works">
+            <h2>Bagaimana Cara Kerjanya?</h2>
+            <p>Tekan tombol "Buat Sampul Brat!" dan kami akan secara acak menampilkan sebuah frasa atau gaya yang keren untuk sampul Anda.</p>
+            <p>Anda bisa menekan tombol berkali-kali sampai menemukan desain yang paling Anda sukai.</p>
+            <p>Setelah menemukan desain yang pas, cukup ambil tangkapan layar untuk menyimpannya dan menggunakannya!</p>
+        </div>
+    </div>
+
+    <script>
+        const bratContainer = document.getElementById('brat-container');
+        const phrases = [
+            "🔥 Brat Kekinian Abis 🔥",
+            "😎 Brat Elegan Berkelas 😎",
+            "✨ Brat Glamor Memukau ✨",
+            "🚀 Brat Kreatif Inovatif 🚀",
+            "👑 Brat Eksklusif Terpercaya 👑",
+            "⚡ Brat Cepat Tanggap ⚡",
+            "💡 Brat Solusi Terbaik 💡",
+            "🌈 Brat Penuh Warna 🌈",
+            "💯 Brat Berkualitas Tinggi 💯",
+            "💎 Brat Sangat Berharga 💎"
+        ];
+
+        function generateBrat() {
+            const randomPhrase = phrases[(Math.floor(Math.random() * phrases.length))];
+            bratContainer.textContent = randomPhrase;
+            bratContainer.classList.add('generated'); // Tambahkan kelas untuk perubahan gaya
+            // Hapus kelas setelah beberapa saat untuk animasi selanjutnya
+            setTimeout(() => {
+                bratContainer.classList.remove('generated');
+            }, 500);
+        }
+    </script>
+</body>
+</html>

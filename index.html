@@ -29,7 +29,7 @@
         }
 
         .brat-container {
-            background-color: #79bf6a; /* Warna hijau baru */
+            background-color: #79bf6a;
             color: white;
             padding: 30px;
             min-height: 200px;
@@ -40,14 +40,33 @@
             font-weight: bold;
             line-height: 1.5;
             margin-bottom: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .input-text {
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .text-input {
             width: 90%;
             padding: 10px;
             font-size: 1em;
             border: 1px solid #ccc;
-            margin-bottom: 20px;
+        }
+        
+        .color-input {
+            width: 100px;
+            height: 40px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
         }
 
         .action-button {
@@ -55,7 +74,7 @@
             font-size: 1.1em;
             cursor: pointer;
             border: none;
-            background-color: #388e3c; /* Warna tombol hijau gelap */
+            background-color: #388e3c;
             color: white;
         }
         
@@ -73,10 +92,22 @@
 <body>
     <div class="main-content">
         <div class="brat-instruction">
-            Klik tombol 'Buat' untuk membuat sampul brat Anda
+            Buat sampul brat kustom Anda!
         </div>
 
-        <input type="text" id="textInput" class="input-text" placeholder="Masukkan teks di sini">
+        <div class="input-group">
+            <label for="textInput">Teks Sampul:</label>
+            <input type="text" id="textInput" class="text-input" placeholder="Masukkan teks di sini">
+        </div>
+
+        <div class="input-group">
+            <label for="bgColorInput">Warna Latar Belakang:</label>
+            <input type="color" id="bgColorInput" class="color-input" value="#79bf6a">
+        </div>
+        <div class="input-group">
+            <label for="textColorInput">Warna Teks:</label>
+            <input type="color" id="textColorInput" class="color-input" value="#ffffff">
+        </div>
 
         <div class="brat-container" id="brat-container">
             Tulisan Anda akan muncul di sini.
@@ -92,12 +123,21 @@
     <script>
         function generateBrat() {
             const textInput = document.getElementById('textInput');
+            const bgColorInput = document.getElementById('bgColorInput');
+            const textColorInput = document.getElementById('textColorInput');
             const bratContainer = document.getElementById('brat-container');
+            
             const userText = textInput.value;
+            const bgColor = bgColorInput.value;
+            const textColor = textColorInput.value;
 
-            // Jika input kosong, tampilkan pesan default
+            // Terapkan warna
+            bratContainer.style.backgroundColor = bgColor;
+            bratContainer.style.color = textColor;
+
+            // Jika input teks kosong, tampilkan pesan default
             if (userText.trim() === "") {
-                bratContainer.textContent = "Masukkan teks di sini";
+                bratContainer.textContent = "Tulis sesuatu di sini";
             } else {
                 bratContainer.textContent = userText;
             }

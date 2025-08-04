@@ -19,7 +19,7 @@
         }
 
         .main-content {
-            max-width: 600px; /* Ukuran container diperbesar */
+            max-width: 600px;
             margin: 0 auto;
             background-color: #fff;
             padding: 30px;
@@ -36,20 +36,19 @@
         .brat-container {
             background-color: #79bf6a;
             color: white;
-            padding: 50px 30px; /* Padding diperbesar */
-            min-height: 250px; /* Tinggi minimal diperbesar */
+            padding: 50px 30px;
+            min-height: 250px;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Font Oswald baru diterapkan di sini */
             font-family: 'Oswald', sans-serif;
-            font-size: 3.0em; /* Ukuran font diperbesar */
-            font-weight: 700; /* Dibuat tebal agar mirip */
+            font-size: 3.0em;
+            font-weight: 700;
             line-height: 1.2;
             margin-bottom: 20px;
             transition: background-color 0.3s, color 0.3s;
             filter: blur(1px);
-            border-radius: 10px; /* Tambahkan sedikit radius */
+            border-radius: 10px;
         }
 
         .input-group {
@@ -105,11 +104,11 @@
             border: none;
             color: white;
             border-radius: 5px;
-            margin-right: 10px; /* Tambahkan margin kanan untuk pemisahan */
+            margin-right: 10px;
         }
 
         .copy-button {
-            background-color: #007bff; /* Warna biru untuk tombol salin */
+            background-color: #007bff;
         }
 
         .copy-button:hover {
@@ -117,7 +116,7 @@
         }
 
         .download-button {
-            background-color: #dc3545; /* Warna merah untuk tombol download */
+            background-color: #dc3545;
         }
 
         .download-button:hover {
@@ -130,7 +129,6 @@
             margin-top: 20px;
         }
 
-        /* Sembunyikan sementara */
         #canvasOutput {
             display: none;
         }
@@ -211,45 +209,59 @@
         function downloadImage() {
             const bratContainer = document.getElementById('brat-container');
             const text = bratContainer.textContent;
-            const bgColor = window.getComputedStyle(bratContainer).backgroundColor;
-            const textColor = window.getComputedStyle(bratContainer).color;
-            const font = window.getComputedStyle(bratContainer).fontFamily;
-            const fontSize = window.getComputedStyle(bratContainer).fontSize;
+            
+            // Ambil computed styles untuk memastikan konsistensi
+            const computedStyle = window.getComputedStyle(bratContainer);
+            const bgColor = computedStyle.backgroundColor;
+            const textColor = computedStyle.color;
+            const font = computedStyle.fontFamily;
+            const fontSize = computedStyle.fontSize;
+            const paddingX = parseInt(computedStyle.paddingLeft) + parseInt(computedStyle.paddingRight);
+            const paddingY = parseInt(computedStyle.paddingTop) + parseInt(computedStyle.paddingBottom);
 
             const canvas = document.getElementById('canvasOutput');
             const ctx = canvas.getContext('2d');
+            const scaleFactor = 2; // Menggandakan resolusi untuk kualitas lebih baik
 
-            canvas.width = bratContainer.offsetWidth * 2;
-            canvas.height = bratContainer.offsetHeight * 2;
-            ctx.scale(2, 2);
+            // Atur ukuran canvas sesuai dengan ukuran container (dikali skala)
+            canvas.width = (bratContainer.offsetWidth) * scaleFactor;
+            canvas.height = (bratContainer.offsetHeight) * scaleFactor;
+            ctx.scale(scaleFactor, scaleFactor);
 
+            // Terapkan efek blur yang sama seperti di CSS
+            ctx.filter = computedStyle.filter;
+
+            // Gambar latar belakang
             ctx.fillStyle = bgColor;
-            ctx.fillRect(0, 0, canvas.width / 2, canvas.height / 2);
+            ctx.fillRect(0, 0, bratContainer.offsetWidth, bratContainer.offsetHeight);
 
+            // Atur font dan warna teks
             ctx.font = `${fontSize} ${font}`;
             ctx.fillStyle = textColor;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 
+            // Logika untuk membungkus teks (wrap text)
             const words = text.split(' ');
             let line = '';
-            let y = canvas.height / 4;
+            let y = (bratContainer.offsetHeight / 2);
             const lineHeight = parseInt(fontSize) * 1.2;
-            const maxWidth = canvas.width / 2 - 40;
+            const maxWidth = bratContainer.offsetWidth - paddingX;
 
             for (let i = 0; i < words.length; i++) {
                 const testLine = line + words[i] + ' ';
                 const metrics = ctx.measureText(testLine);
                 if (metrics.width > maxWidth && i > 0) {
-                    ctx.fillText(line, canvas.width / 4, y);
+                    ctx.fillText(line, bratContainer.offsetWidth / 2, y);
                     line = words[i] + ' ';
                     y += lineHeight;
                 } else {
                     line = testLine;
                 }
             }
-            ctx.fillText(line, canvas.width / 4, y);
+            ctx.fillText(line, bratContainer.offsetWidth / 2, y);
 
+            // Buat link download dan picu klik
             const dataURL = canvas.toDataURL('image/png');
             const downloadLink = document.createElement('a');
             downloadLink.href = dataURL;

@@ -19,10 +19,10 @@
         }
 
         .main-content {
-            max-width: 400px;
+            max-width: 600px; /* Ukuran container diperbesar */
             margin: 0 auto;
             background-color: #fff;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
@@ -36,18 +36,19 @@
         .brat-container {
             background-color: #79bf6a;
             color: white;
-            padding: 30px;
-            min-height: 200px;
+            padding: 50px 30px; /* Padding diperbesar */
+            min-height: 250px; /* Tinggi minimal diperbesar */
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.2em;
+            font-size: 3.0em; /* Ukuran font diperbesar */
             font-weight: normal;
             line-height: 1.2;
             margin-bottom: 20px;
             transition: background-color 0.3s, color 0.3s;
             filter: blur(1px);
+            border-radius: 10px; /* Tambahkan sedikit radius */
         }
 
         .input-group {
@@ -77,6 +78,10 @@
             cursor: pointer;
         }
 
+        .button-group {
+            margin-top: 20px;
+        }
+
         .action-button {
             padding: 12px 30px;
             font-size: 1.1em;
@@ -85,29 +90,48 @@
             background-color: #388e3c;
             color: white;
             margin-right: 10px;
+            border-radius: 5px;
         }
-        
+
         .action-button:hover {
             background-color: #2e7d32;
         }
 
-        .copy-button {
+        .copy-button, .download-button {
             padding: 12px 30px;
             font-size: 1.1em;
             cursor: pointer;
             border: none;
-            background-color: #007bff; /* Warna biru untuk tombol salin */
             color: white;
+            border-radius: 5px;
+            margin-right: 10px; /* Tambahkan margin kanan untuk pemisahan */
         }
-        
+
+        .copy-button {
+            background-color: #007bff; /* Warna biru untuk tombol salin */
+        }
+
         .copy-button:hover {
             background-color: #0056b3;
+        }
+
+        .download-button {
+            background-color: #dc3545; /* Warna merah untuk tombol download */
+        }
+
+        .download-button:hover {
+            background-color: #c82333;
         }
 
         .save-instruction {
             font-size: 0.9em;
             color: #666;
             margin-top: 20px;
+        }
+
+        /* Sembunyikan sementara */
+        #canvasOutput {
+            display: none;
         }
     </style>
 </head>
@@ -135,13 +159,18 @@
             Tulisan Anda akan muncul di sini.
         </div>
 
-        <button class="action-button" onclick="generateBrat()">Buat</button>
-        <button class="copy-button" onclick="copyText()">Salin Teks</button>
+        <div class="button-group">
+            <button class="action-button" onclick="generateBrat()">Buat</button>
+            <button class="copy-button" onclick="copyText()">Salin Teks</button>
+            <button class="download-button" onclick="downloadImage()">Unduh Gambar</button>
+        </div>
 
         <div class="save-instruction">
-            Ambil tangkapan layar untuk menyimpan
+            Anda juga bisa mengambil tangkapan layar untuk menyimpan
         </div>
     </div>
+
+    <canvas id="canvasOutput" style="display:none;" width="800" height="400"></canvas>
 
     <script>
         function generateBrat() {
@@ -176,6 +205,57 @@
                     console.error('Gagal menyalin teks: ', err);
                     alert("Gagal menyalin teks. Silakan salin secara manual.");
                 });
+        }
+
+        function downloadImage() {
+            const bratContainer = document.getElementById('brat-container');
+            const text = bratContainer.textContent;
+            const bgColor = window.getComputedStyle(bratContainer).backgroundColor;
+            const textColor = window.getComputedStyle(bratContainer).color;
+            const font = window.getComputedStyle(bratContainer).fontFamily;
+            const fontSize = window.getComputedStyle(bratContainer).fontSize;
+
+            const canvas = document.getElementById('canvasOutput');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = bratContainer.offsetWidth * 2;
+            canvas.height = bratContainer.offsetHeight * 2;
+            ctx.scale(2, 2);
+
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, canvas.width / 2, canvas.height / 2);
+
+            ctx.font = `${fontSize} ${font}`;
+            ctx.fillStyle = textColor;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            const words = text.split(' ');
+            let line = '';
+            let y = canvas.height / 4;
+            const lineHeight = parseInt(fontSize) * 1.2;
+            const maxWidth = canvas.width / 2 - 40;
+
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                const metrics = ctx.measureText(testLine);
+                if (metrics.width > maxWidth && i > 0) {
+                    ctx.fillText(line, canvas.width / 4, y);
+                    line = words[i] + ' ';
+                    y += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, canvas.width / 4, y);
+
+            const dataURL = canvas.toDataURL('image/png');
+            const downloadLink = document.createElement('a');
+            downloadLink.href = dataURL;
+            downloadLink.download = 'sampul_brat.png';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         }
     </script>
 </body>
